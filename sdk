@@ -1,0 +1,12 @@
+#! /bin/bash
+
+script=$(readlink -f "$0")
+scriptdir=$(dirname "$script")
+
+source "$scriptdir/aos.sh"
+
+if [ -n "$sdk_not_found" ]; then
+	exit 1
+fi
+
+"$@"

@@ -1,6 +1,17 @@
-#!/bin/sh
+#! /bin/sh
 
-. ./aos.sh
+# sanity check
+if [ -n "$OECORE_TARGET_SYSROOT" ]; then
+	echo "E: $0 will source the environment script for you. It should not be sourced prior to building host tools" >&2
+	exit 1
+fi
 
-make "$@"
+# This will build protobuf's protoc compiler for the host platform using host tools
+# and use it for the C++ codegen
+make -f openfmb.mk "$@" || exit 1
 
+# build protobuf for the target
+./sdk make -f protobuf-target.mk "$@" || exit 1
+
+# build app
+./sdk make "$@" || exit 1

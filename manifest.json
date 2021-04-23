@@ -1,13 +1,16 @@
 {
-	"aos-app-name": "aos_metering_app",
+	"name": "aos_openfmb_adapter",
 	"version": "1.0",
-	"exe-name": "aos_metering_app",
+	"exe-name": "aos_openfmb_adapter",
 	"m2m": {
-		"app-name": "metersvc-smpl",
+		"app-name": "metersvc-openfmb",
 		"app-id": "Nra1.com.aos.iot",
-		"ae-rn": "metersvc-smpl"
+		"ae-rn": "metersvc-openfmb"
 	},
 	"files": [
-		"aos_metering_app"
+		"aos_openfmb_adapter",
+		"demo_ca.pem",
+		"device.pem",
+		"device.key"
 	]
 }
