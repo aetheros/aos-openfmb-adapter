@@ -327,7 +327,7 @@ void notificationCallback(m2m::Notification notification)
         profile.SerializeToString(&openfmbPayload);
 
         logDebug("publishing");
-        mqttClient.publish("openfmb/loadmodule/LoadReadingProfile", MqttPublishQos, openfmbPayload, false);
+        mqttClient.publish("openfmb/metermodule/MeterReadingProfile", MqttPublishQos, openfmbPayload, false);
     }
 
     if (meterSvcData.powerQuality.isSet())
