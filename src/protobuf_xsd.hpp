@@ -18,6 +18,17 @@ void setTimestamp(T * t, const std::chrono::seconds & timestamp)
     }
 }
 
+template <>
+void setTimestamp(commonmodule::MessageInfo * messageInfo, const std::chrono::seconds & timestamp)
+{
+    constexpr std::chrono::seconds Epoch(0);
+    if (timestamp != Epoch)
+	{
+        messageInfo->mutable_messagetimestamp()->set_seconds(timestamp.count());
+    }
+}
+
+
 template <typename TValue,
           typename std::enable_if<std::is_integral<TValue>::value, bool>::type = true >
 void set(commonmodule::AnalogueValue * v, const TValue value)

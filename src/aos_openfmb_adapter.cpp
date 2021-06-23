@@ -19,11 +19,24 @@
 
 #include "protobuf_xsd.hpp"
 
+#include <uuid/uuid.h>
+
 using std::chrono::seconds;
 using std::chrono::minutes;
 using std::chrono::duration_cast;
 
 constexpr int MqttPublishQos = 0;
+
+uuid_t meterUuid;
+
+std::string toString(const uuid_t uuid)
+{
+    char buf[40];
+
+    uuid_unparse(uuid, buf);
+
+    return std::string(buf);
+}
 
 m2m::AppEntity appEntity;
 
@@ -49,10 +62,14 @@ int main(int argc, char *argv[])
     // scope the application main loop
     aos::AppMain appMain;
 
+    char hardcodedUuid[] = "f72ba8f6-d390-11eb-ab5f-bf67369bdb6e";
+
+    uuid_parse(hardcodedUuid, meterUuid);
+
     const char *poaUri = nullptr;
     const char *poaAddr = nullptr;
 
-    std::string brokerAddress = "192.168.225.32";
+    std::string brokerAddress = "127.0.0.1";
     unsigned short brokerPort = 1883;
 
     int opt;
@@ -271,6 +288,8 @@ bool translate(commonmodule::ReadingMMXU * mmxu, const xsd::mtrsvc::MeterSvcData
 
 void notificationCallback(m2m::Notification notification)
 {
+    uuid_t messageUuid;
+
     logDebug("-");
     if (!notification.notificationEvent.isSet())
     {
@@ -307,6 +326,10 @@ void notificationCallback(m2m::Notification notification)
         auto meter = profile.mutable_meter();
         auto conductingEquipment = meter->mutable_conductingequipment();
 
+        auto readingMessageInfo = profile.mutable_readingmessageinfo();
+        auto messageInfo = readingMessageInfo->mutable_messageinfo();
+        setTimestamp(messageInfo, timestamp);
+
         std::string meterId = "Some Meter";
         if (meterSvcData.meterId.isSet())
         {
@@ -314,7 +337,7 @@ void notificationCallback(m2m::Notification notification)
         }
         logInfo("meterId = " << meterId);
 
-        *conductingEquipment->mutable_mrid() = "mrid";
+        *conductingEquipment->mutable_mrid() = toString(meterUuid);
         initialize(conductingEquipment->mutable_namedobject(),
                    meterId, // name
                    "Meter" // description
@@ -323,11 +346,16 @@ void notificationCallback(m2m::Notification notification)
         auto mmxu = reading->mutable_readingmmxu();
         translate(mmxu, meterSvcData, timestamp);
 
+        uuid_generate_time_safe(messageUuid);
+
+        auto messageIdentity = messageInfo->mutable_identifiedobject();
+        messageIdentity->mutable_mrid()->set_value(toString(messageUuid));
+
         std::string openfmbPayload;
         profile.SerializeToString(&openfmbPayload);
 
         logDebug("publishing");
-        mqttClient.publish("openfmb/metermodule/MeterReadingProfile", MqttPublishQos, openfmbPayload, false);
+        mqttClient.publish("openfmb/metermodule/MeterReadingProfile/" + toString(meterUuid), MqttPublishQos, openfmbPayload, false);
     }
 
     if (meterSvcData.powerQuality.isSet())

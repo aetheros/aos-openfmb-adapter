@@ -20,7 +20,7 @@ LDFLAGS += $(OPENFMB_LDFLAGS)
 CXXFLAGS += -std=c++14
 CXXFLAGS += -MMD -MP
 
-LIBS += -lsdk_m2m -lsdk_aos -lm2mgen -lxsd -lxsd_mtrsvc -lcoap -lcommon -lappfw $(OPENFMB_LIBS)
+LIBS += -luuid -lsdk_m2m -lsdk_aos -lm2mgen -lxsd -lxsd_mtrsvc -lcoap -lcommon -lappfw $(OPENFMB_LIBS)
 
 SRCS = $(wildcard src/*.cpp)
 
