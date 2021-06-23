@@ -1,5 +1,5 @@
 {
-	"name": "aos_openfmb_adapter",
+	"name": "openfmb_meterapp",
 	"version": "1.0",
 	"exe-name": "aos_openfmb_adapter",
 	"m2m": {
