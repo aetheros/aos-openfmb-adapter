@@ -1,6 +1,6 @@
 {
 	"name": "openfmb_meterapp",
-	"version": "1.0",
+	"version": "1.1",
 	"exe-name": "aos_openfmb_adapter",
 	"m2m": {
 		"app-name": "metersvc-openfmb",
