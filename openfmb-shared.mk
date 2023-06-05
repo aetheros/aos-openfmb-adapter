@@ -1,5 +1,7 @@
 -include protobuf-target-shared.mk
 
+OPENFMB_VERSION ?= v1.0.2
+
 OPENFMB_SOURCE_DIR ?= openfmb-protobuf
 
 OPENFMB_PROTOBUF_SOURCES=$(OPENFMB_SOURCE_DIR)/proto/openfmb/coordinationservicemodule/coordinationservicemodule.proto \
