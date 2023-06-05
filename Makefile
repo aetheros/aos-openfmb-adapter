@@ -40,5 +40,9 @@ $(EXE): $(OBJS)
 clean:
 	rm -f $(EXE) $(OBJS) $(DEPS) *.aos
 
-.PHONY: all clean pkg package
+cleanall: clean
+	rm -Rf $(OPENFMB_SOURCE_DIR)
+	rm -Rf $(PROTOBUF_SOURCE_DIR)
+
+.PHONY: all clean cleanall pkg package
 

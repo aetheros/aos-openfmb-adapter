@@ -29,4 +29,6 @@ openfmb-clean: protobuf-clean
 
 clean: openfmb-clean
 
-.PHONY: all clean openfmb-all openfmb-clean
+cleanall: clean
+
+.PHONY: all clean cleanall openfmb-all openfmb-clean

@@ -25,7 +25,7 @@ protoc: $(PROTOC_BUILD_EXECUTABLE)
 protobuf-clean: protoc-clean
 
 protoc-clean:
-	rm -
+	rm -Rf $(PROTOC_BUILD_DIR)
 
 target-protobuf-clean:
 
@@ -40,5 +40,7 @@ protobuf-clean:
 	rm -Rf $(PROTOC_BUILD_DIR)
 
 clean: protobuf-clean
+
+cleanall: clean
 
 .PHONY: all clean protoc protoc-clean
