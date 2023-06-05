@@ -28,21 +28,6 @@ void setTimestamp(commonmodule::MessageInfo * messageInfo, const std::chrono::se
     }
 }
 
-
-template <typename TValue,
-          typename std::enable_if<std::is_integral<TValue>::value, bool>::type = true >
-void set(commonmodule::AnalogueValue * v, const TValue value)
-{
-    v->mutable_i()->set_value(value);
-}
-
-template <typename TValue,
-          typename std::enable_if<std::is_floating_point<TValue>::value, bool>::type = true >
-void set(commonmodule::AnalogueValue * v, const TValue value)
-{
-    v->mutable_f()->set_value(value);
-}
-
 template <typename TElement,
           typename TProtobufType,
           unsigned isOptional,
@@ -67,8 +52,8 @@ bool set(TProtobufType * p, const TElement & mag, const TElement & angle)
         return false;
     }
 
-    set(p->mutable_mag(), mag);
-    set(p->mutable_ang(), angle);
+    p->set_mag(*mag);
+    p->set_ang(*angle);
 
     return true;
 }
@@ -82,7 +67,7 @@ bool set(TProtobufType * p, const TElement & mag, nullptr_t)
         return false;
     }
 
-    set(p->mutable_mag(), mag);
+    p->set_mag(*mag);
 
     return true;
 }
@@ -90,8 +75,8 @@ bool set(TProtobufType * p, const TElement & mag, nullptr_t)
 template <typename TValue>
 void set(commonmodule::Vector * v, const TValue mag, const TValue angle)
 {
-    set(v->mutable_mag(), mag);
-    set(v->mutable_ang(), angle);
+    v->set_mag(*mag);
+    v->mutable_ang()->set_value(*angle);
 }
 
 template <typename TValue>
@@ -123,13 +108,13 @@ void set(commonmodule::CMV * cmv, const TValue mag, const TValue angle, const st
 template <typename TValue>
 void set(commonmodule::Vector * v, const TValue mag, nullptr_t)
 {
-    set(v->mutable_mag(), mag);
+    v->set_mag(*mag);
 }
 
 template <typename TElement>
 void set(commonmodule::MV * mv, const TElement value, const std::chrono::seconds & timestamp)
 {
-    set(mv->mutable_mag(), value);
+    mv->set_mag(*value);
     setTimestamp(mv, timestamp);
 }
 

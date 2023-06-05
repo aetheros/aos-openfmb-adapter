@@ -1,24 +1,25 @@
 -include protobuf-target-shared.mk
 
-OPENFMB_VERSION ?= v1.0.2
+OPENFMB_VERSION ?= v2.0.0
 
 OPENFMB_SOURCE_DIR ?= openfmb-protobuf
 
-OPENFMB_PROTOBUF_SOURCES=$(OPENFMB_SOURCE_DIR)/proto/openfmb/coordinationservicemodule/coordinationservicemodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/loadmodule/loadmodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/regulatormodule/regulatormodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/reclosermodule/reclosermodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/metermodule/metermodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/resourcemodule/resourcemodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/generationmodule/generationmodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/uml.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/solarmodule/solarmodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/optimizermodule/optimizermodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/breakermodule/breakermodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/interconnectionmodule/interconnectionmodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/switchmodule/switchmodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/essmodule/essmodule.proto \
-                 $(OPENFMB_SOURCE_DIR)/proto/openfmb/commonmodule/commonmodule.proto
+OPENFMB_PROTOBUF_SOURCES=$(OPENFMB_SOURCE_DIR)/proto/openfmb/loadmodule/loadmodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/regulatormodule/regulatormodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/reclosermodule/reclosermodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/metermodule/metermodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/resourcemodule/resourcemodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/generationmodule/generationmodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/circuitsegmentservicemodule/circuitsegmentservicemodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/uml.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/capbankmodule/capbankmodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/solarmodule/solarmodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/reservemodule/reservemodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/breakermodule/breakermodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/interconnectionmodule/interconnectionmodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/switchmodule/switchmodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/essmodule/essmodule.proto \
+                         $(OPENFMB_SOURCE_DIR)/proto/openfmb/commonmodule/commonmodule.proto
 
 OPENFMB_BUILD_DIR=$(OPENFMB_SOURCE_DIR)/generated
 OPENFMB_PROTOBUF_INCLUDE=$(OPENFMB_SOURCE_DIR)/proto/openfmb
