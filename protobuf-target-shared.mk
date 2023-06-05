@@ -3,6 +3,8 @@ ROOT_DIR ?= $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 PROTOBUF_SOURCE_DIR ?= $(ROOT_DIR)/protobuf-build
 PROTOBUF_CONFIGURE = $(PROTOBUF_SOURCE_DIR)/configure
 
+PROTOBUF_VERSION=v3.16.0
+
 PROTOC_BUILD_DIR ?= $(PROTOBUF_SOURCE_DIR)/host-build
 PROTOC_MAKEFILE = $(PROTOBUF_BUILD_DIR)/Makefile
 PROTOC_INSTALL_DIR ?= $(PROTOBUF_SOURCE_DIR)/host-install
@@ -21,7 +23,7 @@ $(info TARGET_PROTOBUF_PKG_CONFIG_PATH=$(TARGET_PROTOBUF_PKG_CONFIG_PATH))
 TARGET_PROTOBUF_CXXFLAGS += -I$(TARGET_PROTOBUF_INCLUDE)
 
 $(PROTOBUF_SOURCE_DIR)/autogen.sh:
-	git clone https://github.com/protocolbuffers/protobuf.git protobuf-build
+	git clone --branch=$(PROTOBUF_VERSION) https://github.com/protocolbuffers/protobuf.git protobuf-build
 
 $(PROTOBUF_CONFIGURE): $(PROTOBUF_SOURCE_DIR)/autogen.sh
 	cd $(PROTOBUF_SOURCE_DIR) ; \
