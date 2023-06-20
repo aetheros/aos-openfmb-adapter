@@ -4,7 +4,7 @@
 	"exe-name": "aos_openfmb_adapter",
 	"m2m": {
 		"app-name": "metersvc-openfmb",
-		"app-id": "Nra1.com.aos.iot",
+		"app-id": "Ra1.com.aetheros.aos-openfmb-der-circuit-mgmt",
 		"ae-rn": "metersvc-openfmb"
 	},
 	"files": [
